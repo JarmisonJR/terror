@@ -1,0 +1,55 @@
+<!DO<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coração Tridimensional "Eu Te Amo"</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="heart-container" id="heart"></div>
+
+    <script href="script.js" src="script.js"></script>
+</body>
+</html>
+
+    <div class="heart-container" id="heart"></div>
+
+    <script>
+        const heartContainer = document.getElementById('heart');
+        const phrase = " EU TE AMO ";
+        const totalLetters = 180; // Quantidade de letras para formar o contorno
+        
+        // Equação matemática paramétrica do coração
+        for (let i = 0; i < totalLetters; i++) {
+            // t varia de 0 a 2*PI
+            let t = (i / totalLetters) * 2 * Math.PI;
+            
+            // Fórmula clássica do formato de coração (Cardióide)
+            // Multiplicamos por 12 para dar uma escala legal na tela
+            let x = 16 * Math.pow(Math.sin(t), 3) * 12;
+            let y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t)) * 12;
+            
+            // Cria o elemento da letra
+            const span = document.createElement('span');
+            span.className = 'letter';
+            
+            // Pega a letra correspondente na frase repetindo-a
+            span.innerText = phrase[i % phrase.length];
+            
+            // Distribui as letras ligeiramente no eixo Z para criar o efeito de contorno 3D "gordinho"
+            // Se quiser ele totalmente plano no meio do giro, mude o z para 0
+            let z = Math.sin(t * 2) * 15; 
+
+            // Aplica a posição usando transformações 3D
+            span.style.transform = `translate3d(${x}px, ${y}px, ${z}px) translate(-50%, -50%)`;
+            
+            // Efeito degradê de cores opcional (do rosa para o vermelho escuro)
+            span.style.color = `hsl(${340 + Math.sin(t) * 20}, 100%, 60%)`;
+            
+            heartContainer.appendChild(span);
+        }
+    </script>
+</body>
+</html>
