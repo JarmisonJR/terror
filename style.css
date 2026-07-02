@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #050505;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    perspective: 1000px; /* Cria a profundidade para o efeito 3D */
+}
+
+/* Container que segura o coração e gira no eixo vertical (Y) */
+.heart-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    animation: rotateHeart 12s linear infinite;
+}
+
+/* Estilo de cada letra individual do "Eu Te Amo" */
+.letter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 14px;
+    color: #ff2a6d;
+    text-shadow: 0 0 10px #ff2a6d, 0 0 20px #ff2a6d;
+    transform-style: preserve-3d;
+    user-select: none;
+}
+
+/* Animação que faz o coração rodar de forma infinita */
+@keyframes rotateHeart {
+    0% {
+        transform: rotateY(0deg) rotateX(15deg);
+    }
+    100% {
+        transform: rotateY(360deg) rotateX(15deg);
+    }
+}
